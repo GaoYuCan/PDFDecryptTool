@@ -3,7 +3,11 @@ import base64
 import PyPDF2
 import re
 
-PATH = r"C:\Users\Sink\Downloads\50MB__软件工程实用案例教程_1665579110"
+PATH = input("Please enter the directory where the html file is located: ")
+
+if not os.path.isdir(PATH):
+    print(f'[e]: "{PATH}" is not a directory')
+    exit(0)
 
 print(f"[>] scanning for html files.")
 
@@ -38,6 +42,11 @@ for file_name in filename_list:
         line_bytes = html_file.readline()
     html_file.close()
     i += 1
+
+if len(tmp_files) == 0:
+    print('[e]: pdf file not found.')
+    exit(0)
+
 print(f'[>] pdf success done, merging pdf file.')
 # 合并 PDF
 pdf_merger = PyPDF2.PdfFileMerger()
